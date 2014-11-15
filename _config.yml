@@ -1,3 +1,4 @@
-name: Your New Jekyll Site
+name: Pseudo Random Thoughts 
 markdown: redcarpet
 pygments: true
+permalink: /:title/
