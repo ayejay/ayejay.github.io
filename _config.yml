@@ -1,0 +1,4 @@
+name: Pseudo Random Thoughts 
+markdown: redcarpet
+pygments: true
+permalink: /:title/

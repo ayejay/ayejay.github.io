@@ -1,0 +1,32 @@
+---
+layout: post
+title: Unit Test Better
+date: 2013-12-07 09:26:14.000000000 +05:30
+categories:
+- tech
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  fsb_show_social: '0'
+  fsb_social_twitter: '2'
+  fsb_social_facebook: '0'
+  fsb_social_google: '0'
+  fsb_social_linkedin: '0'
+  _edit_last: '1'
+author:
+  login: ayejayys
+  email: ayejayys@ayejayys.in
+  display_name: ayejayys
+  first_name: ''
+  last_name: ''
+---
+<p>Sometimes, we indulge ourselves so deep in some task that we often forget the purpose of doing it. The same happened with me while I was writing unit tests for some application. So, I stopped writing tests and began to think about why I started writing tests in the first place and how I can make these tests better. I started writing tests because I did not want to manually test my application for every little change I made to my code repo. It is better to have a test suite which can tell me about possible functionality breakage. Thinking about how part, I came across a few points.<br />
+<!--more--></p>
+<p><strong>Test public methods only</strong>. I started unit testing with the tendency of testing every line and every method but after discussing with community elders and writing a few tests, I realised that it is not a good idea to test private and protected methods. The reason is that our application is the interface we are exposing. A lot of things can be changed and refactored behind the curtains and which might lead to maintainability issues for your tests.</p>
+<p><strong>Use dependency injection</strong>. This would not be something novel for most of the us. Everyone writing code for a while comes across these words but it is often rare to see the dependency inversion implemented  well enough. Coming to point that dependency inversion eases unit testing, it helps a lot in unit testing a module in isolation by replacing external dependencies with test doubles.</p>
+<p><strong>Do not just test everything</strong>. Remember that we would not have complete code coverage for any non-trivial application. We can skip testing plain getters-setters and other trivial methods which do not add any value to our test suite. Better try to cover section of application first which are critical. It would not be sane to test <em>everything</em> to just have a better code coverage.</p>
+<p><strong>Avoid fragile tests</strong>. <a title="Fragile tests" href="http://xunitpatterns.com/Fragile%20Test.html" target="_blank">Fragile tests</a> are the ones which stop working even if we have not changed anything related to the test in application. These leads to dreadful maintainability issues which are better avoided.</p>
+<p><strong>Judicious use of static methods</strong>. In the past, usage of static methods had been a taboo for writing unit tests as static methods could not  be mocked easily. When we want to unit test a class, we might want to test it in isolation and we would need test doubles for mocking or stubbing the dependencies. Static methods could not be replaced with test doubles so developers used to have a hard time. Now, various tools are present for <a title="stubbing and mocking" href="http://sebastian-bergmann.de/archives/883-Stubbing-and-Mocking-Static-Methods.html" target="_blank">stubbing and mocking</a> static functions but few limitations are still there. So, let us be cautious with use of static methods, singletons. We would not want to try  troublesome static methods with side effects anyway unless we have some strong reasons for it.</p>
+<p>Few other things popped up in my mind but they have more to do with personal inclinations so I skipped them. Please suggest if you think something else deserves a mention here.</p>
