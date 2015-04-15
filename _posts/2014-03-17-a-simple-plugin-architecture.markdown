@@ -1,26 +1,11 @@
 ---
 layout: post
 title: A simple plugin architecture
+subtitle: One rule to live by, KISS
 date: 2014-03-17 21:29:57.000000000 +05:30
 categories:
 - tech
-tags: []
-status: publish
-type: post
-published: true
-meta:
-  fsb_social_twitter: '3'
-  _edit_last: '1'
-  fsb_show_social: '0'
-  fsb_social_facebook: '1'
-  fsb_social_google: '0'
-  fsb_social_linkedin: '0'
-author:
-  login: ayejayys
-  email: ayejayys@ayejayys.in
-  display_name: ayejayys
-  first_name: ''
-  last_name: ''
+header-img: "img/post-bg-04.jpg"
 ---
 <p>While designing an application, it is often desirable that this application can be easily extensible, even by a third party plugin. Now, you might be  pondering about the benefits of an application using third party plugins. There a more than a few advantages of using such an architecture.<!--more--> A few most important of them are</p>
 <ul>

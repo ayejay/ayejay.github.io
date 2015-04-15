@@ -1,4 +1,16 @@
-name: Pseudo Random Thoughts 
-markdown: redcarpet
-pygments: true
+# Site settings
+title: Pseudo Random Thoughts 
+header-img: img/home-bg.jpg
+email: ayejay.nsit@gmail.com 
+description: "Musings of Disenchanted Mind"
+baseurl: ""
+url: "http://ayejayys.in"
+twitter_username: ayejayys 
+github_username:  ayejay
+
+# Build settings
+markdown: kramdown
+highlighter: pygments
 permalink: /:title/
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]

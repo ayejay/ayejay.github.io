@@ -1,26 +1,11 @@
 ---
 layout: post
-title: Unit Test Better
+title: "Unit Test Better"
+subtitle: "For better sleep at night"
 date: 2013-12-07 09:26:14.000000000 +05:30
 categories:
 - tech
-tags: []
-status: publish
-type: post
-published: true
-meta:
-  fsb_show_social: '0'
-  fsb_social_twitter: '2'
-  fsb_social_facebook: '0'
-  fsb_social_google: '0'
-  fsb_social_linkedin: '0'
-  _edit_last: '1'
-author:
-  login: ayejayys
-  email: ayejayys@ayejayys.in
-  display_name: ayejayys
-  first_name: ''
-  last_name: ''
+header-img: "img/post-bg-04.jpg"
 ---
 <p>Sometimes, we indulge ourselves so deep in some task that we often forget the purpose of doing it. The same happened with me while I was writing unit tests for some application. So, I stopped writing tests and began to think about why I started writing tests in the first place and how I can make these tests better. I started writing tests because I did not want to manually test my application for every little change I made to my code repo. It is better to have a test suite which can tell me about possible functionality breakage. Thinking about how part, I came across a few points.<br />
 <!--more--></p>

@@ -1,26 +1,11 @@
 ---
 layout: post
 title: Reflection on Reflection
+subtitle: Way too much meta!
 date: 2014-01-18 10:58:45.000000000 +05:30
 categories:
 - tech
-tags: []
-status: publish
-type: post
-published: true
-meta:
-  fsb_show_social: '0'
-  fsb_social_linkedin: '0'
-  fsb_social_google: '0'
-  fsb_social_twitter: '3'
-  fsb_social_facebook: '1'
-  _edit_last: '1'
-author:
-  login: ayejayys
-  email: ayejayys@ayejayys.in
-  display_name: ayejayys
-  first_name: ''
-  last_name: ''
+header-img: "img/post-bg-04.jpg"
 ---
 <p>Reflection is a very powerful concept in programming domain. It is widely harnessed for various purposes too. You must have noticed quite a few important application of reflection while programming, using frameworks, using IDEs etc. Infact, there are more than few places where we can use reflection for some good.<!--more--> Reflection as per wikipedia, is</p>
 <blockquote><p>the ability of a computer program to examine (see type introspection) and modify the structure and behavior (specifically the values, meta-data, properties and functions) of an object at runtime.</p></blockquote>
