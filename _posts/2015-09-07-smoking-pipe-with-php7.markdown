@@ -37,25 +37,10 @@ expr T_SMOKEPIPE expr   { $$ = zend_ast_create_binary_op(ZEND_ADD, $1, $3); } //
 <br>
 <p>Wait, but have we not decided to solve the biggest problem known to the mankind? Yes, we did. Now, let us move to more fun part of this adventure.</p>
 <br>
-<p>Let us change the AST creation change, we did in last step and change <code>ZEND_ADD</code> to <code>ZEND_SMOKEPIPE</code>. Let us define a function for handling the execution of this operator.
-<pre>
-ZEND_API int ZEND_FASTCALL smokepipe_function(zval *result, zval *op1, zval *op2)
-{
-        ZVAL_LONG(result, 42); //Store the meaning of life in result
-        return SUCCESS;
-}
-</pre> 
-</p>
-
 <p>
-During AST evaluation, we would need to call this function for SMOKEPIPE evaluation. So, let us return <code>smokepipe_function</code> when we encounter <code>ZEND_SMOKEPIPE</code>.
-<pre>
-case ZEND_SMOKEPIPE:
-	return (binary_op_type) smokepipe_function;
-</pre>
-</p>
-<p>
-Well, we are almost there but if you try compiling with current changes, you will get error because we have not defined <code>ZEND_SMOKEPIPE</code> anywhere. Zend VM has a <a href="http://php.net/manual/en/internals2.opcodes.php" target="_blank">list of OPCODES</a> and our opcode is not listed there. So, we will have to define it at several places(operators list, handlers etc). There is a better way to do that. Let us add following code to <i>vm_def</i>
+Let us change the AST creation change, we did in last step and change <code>ZEND_ADD</code> to <code>ZEND_SMOKEPIPE</code>. Zend VM has a <a href="http://php.net/manual/en/internals2.opcodes.php" target="_blank">list of OPCODES</a> and our opcode is not listed there. So, we will have to add our new opcode along with others. We would have to define the VM Handlers for the opcodes. There are different combinations of these handlers for optimization purposes. I would not go into details of that but if you are still curious, <a href="http://jpauli.github.io/2015/02/05/zend-vm-executor.html" target="_blank">here</a> is a very good article about that. 
+<br>
+There is an easy way to generate all these different handlers. Let us add following code to <i>vm_def</i>.
 <pre>
 ZEND_VM_HANDLER(173, ZEND_SMOKEPIPE, CONST|TMPVAR|CV, CONST|TMPVAR|CV) //173 is last opcode+1
 {
@@ -72,12 +57,48 @@ ZEND_VM_HANDLER(173, ZEND_SMOKEPIPE, CONST|TMPVAR|CV, CONST|TMPVAR|CV) //173 is 
         ZEND_VM_NEXT_OPCODE_CHECK_EXCEPTION();
 }
 </pre>
-and run <i>vm_gen.php</i> which would add our <code>ZEND_SMOKEPIPE</code> to all the required places and define VM handlers for different type of operator combinations(constant variables, constants etc).
+This works as a template for the generation of specialized handlers and definition of opcodes. When you run <i>vm_gen.php</i>, you would see new handlers and opcode definitions.
+</p>
+
+<p>
+We have added a <code>smokepipe_function</code> for getting us the results when we use this operator. Let us define it.
+<pre>
+ZEND_API int ZEND_FASTCALL smokepipe_function(zval *result, zval *op1, zval *op2)
+{
+        ZVAL_LONG(result, 42); //Store the meaning of life in result
+        return SUCCESS;
+}
+</pre>
+</p>
+
+<p>
+Now, compile PHP; create a file with following code and run it.
+<pre>
+?php
+$a = 5;
+$b = 6;
+echo  $a~!$b;
+</pre>
+This would work but the following would not
+<pre>
+echo 5 ~! 6;
+</pre>
+Strange!!
+</p>
+
+<p>
+If you use second version of code, PHP would try to directly evaluate the expression because we are using constants. So, we would have to add code at one more place, for opcode evaluation.
+<pre>
+case ZEND_SMOKEPIPE:
+	return (binary_op_type) smokepipe_function;
+</pre>
 </p>
 
 <p>Phew!! After all the hardships and obstacles, we have finally found the tool which would lead us to the true meaning of life.</p>
 
-<p>After fresh compilation, run <code>php -r "echo 7 ~! 5;"</code> from command line, and you would get <code>42</code> printed on your screen, which is infact the meaning of life.
+<p>After fresh compilation, run <code>php -r "echo 7 ~! 5;"</code> from command line and you would see meaning of life, right on your screen.
 </p>
+
+<p>While this would not be practically very useful, we can make PHP more fun with more sugar. The way things are moving in PHP world, future looks good.</p>
 
 <p style="font-size:11px;">This was a little experiment meant only for trying new things. A few of the unimportant details are not mentioned here. If you want to compile and run this, checkout the <a href="https://github.com/ayejay/php7-smokepipe" target="_blank">repo</a></p>
