@@ -101,4 +101,4 @@ case ZEND_SMOKEPIPE:
 
 <p>While this would not be practically very useful, we can make PHP more fun with more sugar. The way things are moving in PHP world, future looks good.</p>
 
-<p style="font-size:11px;">This was a little experiment meant only for trying new things. A few of the unimportant details are not mentioned here. If you want to compile and run this, checkout the <a href="https://github.com/ayejay/php7-smokepipe" target="_blank">repo</a></p>
+<p style="font-size:11px;">This was a little experiment meant only for fun, it might not conform to some of the best coding practices. A few of the unimportant details are not mentioned here. If you want to compile and run this, checkout the <a href="https://github.com/ayejay/php7-smokepipe" target="_blank">repo</a></p>
